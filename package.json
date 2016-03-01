@@ -1,6 +1,6 @@
 {
   "name": "countdowner",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "countdown object which fires when countdown hits 0",
   "main": "countdowner",
   "license": "MIT",
