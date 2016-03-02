@@ -3,3 +3,4 @@
 require('./exports')
 require('./basic')
 require('./error')
+require('./counts')

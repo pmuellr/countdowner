@@ -1,7 +1,7 @@
 'use strict'
 
-const countdowner = require('..')
-const tapeRunner = require('./tapeRunner')(__filename)
+var countdowner = require('..')
+var tapeRunner = require('./tapeRunner')(__filename)
 
 tapeRunner(function noArgs (t) {
   try {
@@ -33,9 +33,19 @@ tapeRunner(function badCallback (t) {
   t.end()
 })
 
-tapeRunner(function badCount (t) {
+tapeRunner(function nonNumericCount (t) {
   try {
     countdowner('foo', function () {})
+    t.fail('should have thrown an exception')
+  } catch (err) {
+    t.pass('should have thrown an exception')
+  }
+  t.end()
+})
+
+tapeRunner(function countLessThanZero (t) {
+  try {
+    countdowner(-1, function () {})
     t.fail('should have thrown an exception')
   } catch (err) {
     t.pass('should have thrown an exception')

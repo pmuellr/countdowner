@@ -1,8 +1,8 @@
 'use strict'
 
-const path = require('path')
+var path = require('path')
 
-const tape = require('tape')
+var tape = require('tape')
 
 module.exports = tapeRunner
 
@@ -10,7 +10,7 @@ function tapeRunner (fileName) {
   fileName = path.basename(fileName)
 
   return function tapeRunner_ (fn) {
-    const fnName = fn.name || 'anonymous!'
-    return tape(`${fileName}: ${fnName}()`, fn)
+    var fnName = fn.name || 'anonymous!'
+    return tape(fileName + ': ' + fnName + '()', fn)
   }
 }

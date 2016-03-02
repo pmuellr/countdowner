@@ -1,10 +1,10 @@
 'use strict'
 
-const countdowner = require('..')
-const tapeRunner = require('./tapeRunner')(__filename)
+var countdowner = require('..')
+var tapeRunner = require('./tapeRunner')(__filename)
 
 tapeRunner(function justCallback (t) {
-  const cd = countdowner(() => {
+  var cd = countdowner(function () {
     t.pass('countdown occurred')
     t.end()
   })
@@ -14,7 +14,7 @@ tapeRunner(function justCallback (t) {
 })
 
 tapeRunner(function startAtThree (t) {
-  const cd = countdowner(3, () => {
+  var cd = countdowner(3, function () {
     t.pass('countdown occurred')
     t.end()
   })
@@ -25,7 +25,7 @@ tapeRunner(function startAtThree (t) {
 })
 
 tapeRunner(function startAtThreeUpToFive (t) {
-  const cd = countdowner(3, () => {
+  var cd = countdowner(3, function () {
     t.pass('countdown occurred')
     t.end()
   })
@@ -33,4 +33,17 @@ tapeRunner(function startAtThreeUpToFive (t) {
   cd.dec() // 2
   cd.inc(); cd.inc(); cd.inc() // 5
   cd.dec(); cd.dec(); cd.dec(); cd.dec(); cd.dec() // 0
+})
+
+tapeRunner(function nextTick (t) {
+  var sideVal = 'foo'
+
+  var cd = countdowner(1, function () {
+    t.equal(sideVal, 'bar', 'sideVal should be "bar"')
+    t.end()
+  })
+
+  cd.dec()
+
+  sideVal = 'bar'
 })
